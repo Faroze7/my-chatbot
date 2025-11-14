@@ -1,7 +1,7 @@
 import React from "react";
 import Chatbot from "./components/Chatbot";
 import "./App.css";
-import logo from "./assets/4.png";
+import logo from "./assets/faroze-logo.png";
 
 function App() {
   return (
