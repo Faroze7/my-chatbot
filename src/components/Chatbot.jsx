@@ -9,12 +9,39 @@ export default function Chatbot() {
 
   const [input, setInput] = useState("");
 
-  const sendMessage = () => {
-    if (!input.trim()) return;
+  const sendMessage = async () => {
+  if (!input.trim()) return;
 
-    setMessages([...messages, { sender: "user", text: input }]);
-    setInput("");
-  };
+  // Add user message to chat
+  const newMessages = [...messages, { sender: "user", text: input }];
+  setMessages(newMessages);
+
+  const userMessage = input;
+  setInput("");
+
+  try {
+    const res = await fetch("http://localhost:5000/api/chat", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ message: userMessage }),
+});
+
+
+    const data = await res.json();
+
+    // Add the bot's reply
+    setMessages((prev) => [
+      ...prev,
+      { sender: "bot", text: data.reply || "No reply received." },
+    ]);
+
+  } catch (error) {
+    setMessages((prev) => [
+      ...prev,
+      { sender: "bot", text: "Error connecting to chatbot API." },
+    ]);
+  }
+};
 
   return (
     <div className="chat-container">
