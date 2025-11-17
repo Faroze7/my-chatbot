@@ -22,7 +22,7 @@ export default function Chatbot() {
     setBotTypingText("");
 
     try {
-      const res = await fetch("https://your-backend-name.onrender.com/api/chat", {
+      const res = await fetch("https://my-chatbot-7jla.onrender.com//api/chat", {
   method: "POST",
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({ message }),
