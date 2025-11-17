@@ -22,11 +22,11 @@ export default function Chatbot() {
     setBotTypingText("");
 
     try {
-      const res = await fetch("/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: userMessage.content }),
-      });
+      const res = await fetch("https://your-backend-name.onrender.com/api/chat", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ message }),
+});
 
       const data = await res.json();
       await typeBotMessage(data.reply); // Animate bot typing
