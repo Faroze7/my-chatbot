@@ -90,4 +90,6 @@ app.post("/api/chat", async (req, res) => {
 });
 
 // --- Server Startup ---
-app.listen(PORT, () => console.log(`✅ Backend running on http://localhost:${5000}`));
+app.listen(PORT, () => {
+  console.log(`Server running on port ${5000}`);
+});
