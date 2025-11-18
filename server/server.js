@@ -36,17 +36,12 @@ async function callGeminiAPI(message, retries = 3) {
   body: JSON.stringify({
     contents: [
       {
-        role: "system",
+        role: "user",
         parts: [
           {
-            text:
-              "You are a polite assistant. ALWAYS reply in 1–3 short lines. Keep answers short, clear, and simple. Do NOT write long paragraphs."
+            text: `Please reply in 2–3 short lines ONLY. Keep answers concise and simple.\n\nUser question: ${message}`
           }
         ]
-      },
-      {
-        role: "user",
-        parts: [{ text: message }]
       }
     ]
   }),
