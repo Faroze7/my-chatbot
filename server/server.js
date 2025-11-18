@@ -31,12 +31,26 @@ async function callGeminiAPI(message, retries = 3) {
   for (let i = 0; i < retries; i++) {
     try {
       const response = await fetch(GEMINI_API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          contents: [{ role: "user", parts: [{ text: message }] }]
-        }),
-      });
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    contents: [
+      {
+        role: "system",
+        parts: [
+          {
+            text:
+              "You are a polite assistant. ALWAYS reply in 1–3 short lines. Keep answers short, clear, and simple. Do NOT write long paragraphs."
+          }
+        ]
+      },
+      {
+        role: "user",
+        parts: [{ text: message }]
+      }
+    ]
+  }),
+});
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
